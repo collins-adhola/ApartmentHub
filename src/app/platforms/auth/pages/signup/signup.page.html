@@ -1,0 +1,64 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Sign Up
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <div class="signup-container">
+    <h1>Create your account</h1>
+    
+    <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+      <ion-item>
+        <ion-label position="floating">Full Name</ion-label>
+        <ion-input 
+          type="text" 
+          formControlName="fullName"
+          [clearInput]="true"
+        ></ion-input>
+      </ion-item>
+      <ion-text color="danger" *ngIf="signupForm.get('fullName')?.touched && signupForm.get('fullName')?.errors?.['required']">
+        <small>Full name is required</small>
+      </ion-text>
+
+      <ion-item>
+        <ion-label position="floating">Email</ion-label>
+        <ion-input 
+          type="email" 
+          formControlName="email"
+          [clearInput]="true"
+        ></ion-input>
+      </ion-item>
+      <ion-text color="danger" *ngIf="signupForm.get('email')?.touched && signupForm.get('email')?.errors?.['email']">
+        <small>Please enter a valid email</small>
+      </ion-text>
+
+      <ion-item>
+        <ion-label position="floating">Password</ion-label>
+        <ion-input 
+          type="password" 
+          formControlName="password"
+          [clearInput]="true"
+        ></ion-input>
+      </ion-item>
+      <ion-text color="danger" *ngIf="signupForm.get('password')?.touched && signupForm.get('password')?.errors?.['minlength']">
+        <small>Password must be at least 6 characters</small>
+      </ion-text>
+
+      <ion-button 
+        expand="block" 
+        type="submit" 
+        [disabled]="!signupForm.valid"
+        class="ion-margin-top">
+        Sign Up
+      </ion-button>
+    </form>
+
+    <div class="signin-link">
+      Already have an account? 
+      <a routerLink="/auth/login">Login here</a>
+    </div>
+  </div>
+</ion-content> 

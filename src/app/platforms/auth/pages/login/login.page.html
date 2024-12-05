@@ -1,0 +1,56 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Login
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <div class="login-container">
+    <h1>Welcome Back</h1>
+    
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <ion-item>
+        <ion-label position="floating">Email</ion-label>
+        <ion-input 
+          type="email" 
+          formControlName="email"
+          [clearInput]="true"
+        ></ion-input>
+      </ion-item>
+      <ion-text color="danger" *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.errors?.['email']">
+        <small>Please enter a valid email</small>
+      </ion-text>
+
+      <ion-item>
+        <ion-label position="floating">Password</ion-label>
+        <ion-input 
+          type="password" 
+          formControlName="password"
+          [clearInput]="true"
+        ></ion-input>
+      </ion-item>
+      <ion-text color="danger" *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.errors?.['required']">
+        <small>Password is required</small>
+      </ion-text>
+
+      <div class="forgot-password-link">
+        <a routerLink="/auth/forgot-password">Forgot Password?</a>
+      </div>
+
+      <ion-button 
+        expand="block" 
+        type="submit" 
+        [disabled]="!loginForm.valid"
+        class="ion-margin-top">
+        Login
+      </ion-button>
+    </form>
+
+    <div class="signup-link">
+      Don't have an account? 
+      <a routerLink="/auth/signup">Sign up here</a>
+    </div>
+  </div>
+</ion-content> 
